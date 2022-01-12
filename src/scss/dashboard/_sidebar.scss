@@ -1,0 +1,94 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.sidebar {
+  opacity: 0; // En mobil no estara visible
+  background-color: v.$indigo;
+  height: 0; // Quitamos la altura por que aunque no este visible con opacity, sigue ocupando su espacio.
+  overflow: hidden; //Aunque tenga altura de 0, los elementos siguen existiendo y estorban al dar clicks asi que ocultamos los elementos.
+  transition-property: opacity;
+  transition-duration: 500ms;
+
+  &.mostrar {
+    //Animacion que muestra el sidebar cuando se agrega la clase mostrar
+    opacity: 1; //hacemos visible
+    height: 100%; //Crece el 100%
+    padding: 2rem;
+    position: absolute; //Posicionamos en toda la pantalla
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba( 0, 0, 0, 0.9 ); //Agregamos un fondo negro con transparencia
+  }
+  &.ocultar {
+    opacity: 0;
+  }
+  @include m.tablet {
+    //En tablet se mostrara el sidebar
+    opacity: 1; //hacemos visible
+    height: 100%; //Crece el 100% de su padre (dashboard)
+    padding: 2rem;
+  }
+  .contenedor-sidebar {
+    display: flex;
+    justify-content: space-between;
+   
+    h2 {
+      color: v.$blanco;
+      margin: 0;
+      text-align: center;
+    }
+
+    .cerrar-menu { //Contenedor de la imagen para cerrar el menu
+      display: flex;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      img {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      @include m.tablet { //En tablet o mas no mostramos la X de cerrar el menu
+          display: none;
+      }
+    }
+  }
+
+  .sidebar-nav {
+    margin-top: 5rem;
+
+    a {
+      display: block;
+      color: v.$blanco;
+      padding: 0.7rem;
+      transition-property: background-color;
+      transition-duration: 300ms;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      &:hover,
+      &.activo {
+        background-color: darken(v.$indigo, 20%);
+        border-radius: 0.5rem;
+      }
+      @include m.tablet {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+    }
+  }
+  .cerrar-sesion-mobile{
+    margin-top: 10rem;
+    .cerrar-sesion {
+        @include m.boton(v.$indigo, v.$blanco);
+    }
+    @include m.tablet {
+        display: none;
+    }
+  }
+}

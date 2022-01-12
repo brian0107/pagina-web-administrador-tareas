@@ -1,0 +1,77 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contenedor-opciones-proyecto {
+    display: flex;
+    justify-content: center; //Centramos el boton dentro del contenedor
+    gap: 3rem;
+    
+    .eliminar-proyecto{
+
+        @include m.boton(#a90000, v.$blanco);
+    }
+    .agregar-tarea { //Boton agregar tarea
+
+        @include m.boton(v.$cyan, v.$blanco);
+
+    }
+
+}
+.listado-tareas { // Estilos al ul (lista desordenada) 
+    list-style: none;
+    padding: 0;
+    margin-top: 3rem; //Separamos el ul del de nueva tarea
+
+    .no-tareas {
+        text-align: center;
+        
+    }
+}
+
+.tarea { // Estilos a los li de las tareas
+    padding: .5rem 2rem;
+    border-bottom: 2px solid darken(v.$grisClaro, 5%);
+    margin-bottom: 1rem; // Separacion en cada una de las tareas
+
+    // Organizamos el P de un lado y el div con las opciones del otro lado
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:last-of-type{
+        border: none; //Quitamos el borde al ultimo li
+    }
+
+    p{ // Nombre de la tarea
+        font-size: 1.4rem;
+    }
+
+    .opciones {
+        display: flex;
+        gap: 1rem; //separacion entre los botones
+
+        button { //Estilos generales de los botones
+            border: none;
+            font-size: .9rem;
+            padding: .5rem 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: 1rem;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .completa { //botones con la clase completa
+            background-color: v.$azul;
+            color: v.$blanco;
+        }
+        .pendiente { //botones con la clase pendiente
+            background-color: v.$naranja;
+            color: v.$blanco;
+        }
+        .eliminar-tarea{
+            background-color: v.$rojo;
+            color: v.$blanco;
+        }
+    }
+}

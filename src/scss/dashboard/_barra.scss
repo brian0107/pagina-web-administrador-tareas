@@ -1,0 +1,58 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.barra-mobile { // Contenedor de la barra para móvil
+  background-color: v.$indigo;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include m.tablet {  //Esta barra no se muestra en tablet o superior
+    display: none;
+  }
+
+  h1 {
+    color: v.$blanco;
+    margin: 0;
+  }
+
+  .menu {//Contenedor de la imagen que despliega el menu
+    img {
+      width: 0.8rem; //Agregamos un ancho de 8px a la imagen
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.barra {// barra de sesion para tablet o más.
+
+  display: none; // No se muestra en un dispositivo movil
+
+  @include m.tablet {
+    background-color: v.$blanco;
+    padding: 1rem 2rem;
+    box-shadow: 1px 12px 9px -13px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p {  // 'Hola'
+    margin: 0;
+    font-size: 1.4rem;
+
+    span { // 'Nombre usuario'
+      font-weight: 700;
+      color: v.$indigo;
+    }
+  }
+
+  .cerrar-sesion {
+    @include m.boton(darken(v.$indigo, 20%), v.$blanco);
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+}

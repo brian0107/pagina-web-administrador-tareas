@@ -1,0 +1,67 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+//Estilos a la ventana modal que se mostrara para crear una tarea (video 614)
+.modal { 
+    position: absolute; //Si usamos position absolute sin una posición relativa va a tomar como referencia el body y accedemos a top,right,bottom,left ( No conserva el espacio de su posicion original )
+    background-color: rgb(0 0 0 / .8); //Oscuresemos el fondo
+    //Hacemos que la ventana modal se posicione sobre toda la pantalla.
+    top: 0; 
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .formulario { //Estilos al formulario para crear tareas dentro de la ventana modal
+        max-width: 60rem; //Para que no tome todo el ancho disponible que se especifico en los estilos del form
+        background-color: v.$blanco;
+        padding: 2rem;
+        margin: 0 auto; //Centramos el form horizontalmente.
+        transform: translateY(-30rem); //Posicion inicial, translateY mueve el elemento arriba o abajo. El form inicia escondido en la parte superior
+        opacity: 0; //el form inicia transparente
+        border-radius: 1rem;
+
+        legend { //Legenda en el formulario
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            display: block; //Para poder centrar el texto
+            text-align: center; //centramos el texto (propiedad de elementos de bloque)
+        }
+        input[type="text"] { //borde redondeado al input text del form
+            border: 1px solid v.$gris;
+            border-radius: .5rem;
+        }
+
+        .opciones{ //Div que contiene el input submit y el boton cancelar
+             display: flex;
+             justify-content: space-between;
+        }
+
+        .submit-nueva-tarea { //submit añadir tarea
+            @include m.boton(v.$indigo, v.$blanco);
+        }
+
+        .cerrar-modal { //boton cancelar que elimina el modal
+            @include m.boton(v.$naranja, v.$blanco);
+        }
+
+        // Cuando se agregue esta clase cambiara la posicion del form y su visibilidad (mostrandolo)
+        &.animarMostrar { 
+            position: relative; //Toma de referencia la posición actual del form y accedemos a top,right,bottom,left para moverlo ( Conserva el espacio de su posicion actual )
+            top: 50%; //Muestra el elemento despues del 50% de la pantalla, por lo que no se centra correctamente en vertical.
+            transform: translateY(-50%); //Posicion final, sobreescribimos la propiedad que esconde el form y el form termina centrado correctamente
+            opacity: 1; //el form termina visible al terminar el cambio de posicion
+        }
+        // Cuando se agregue esta clase cambiara la posicion del form y su visibilidad (ocultandolo)
+        &.animarOcultar { 
+            transform: translateY(-200%); //Sobreescribimos las propiedades 
+            opacity: 0;
+        }
+        //Animacion (Video 615)
+        transition-property: all; // Todas las propiedades que sean animables(transform y opacity en este caso)
+        transition-duration: 500ms; //Tomara medio segundo la transicion de la animación
+        transition-timing-function: ease-in-out; //ease-in-out: la animacion inicia rapido, despues un poco mas lento y finaliza rapido //ease-in: la animacion inicia un poco mas lento y finaliza mas rapido //ease-out hace lo contrario, la animacion inicia un poco mas rapido y finaliza mas lento 
+       
+        
+    }
+}

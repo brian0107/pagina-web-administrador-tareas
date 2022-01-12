@@ -1,0 +1,15 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.confirmar {
+  margin-top: 5rem;
+  .uptask {
+    @include m.textoDegradado(v.$indigo);
+  }
+  .acciones { //Podemos reescribir algunas propiedades de las acciones ya que en el app.scss primero se ejecutan los componentes y despues la autenticación
+      justify-content: center; //Como solo hay un enlace, lo centramos
+    a {
+      color: v.$indigo;
+    }
+  }
+}

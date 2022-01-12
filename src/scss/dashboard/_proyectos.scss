@@ -1,0 +1,44 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.no-proyectos { //Enlace dentro del Mensaje
+    a{
+        color: v.$indigo;
+    }
+}
+
+.listado-proyectos { //Estilos de la lista
+    list-style: none; //Eliminamos las biñetas
+    padding: 0; //Quitamos el padding por defecto
+    margin-top: 3rem; //Añadimos separación
+
+    //1 columna para movil y 20px de separacion entre filas y columnas
+    @include m.grid(1,2rem); 
+
+    //2 columnas para tablet
+    @include m.tablet { 
+        @include m.grid(2,2rem);
+    }
+
+    //3 columnas para pc
+    @include m.desktop { 
+        @include m.grid(3,2rem);
+    }
+
+    .proyecto{ //Estilos a los elementos de la lista (li)
+        background-color: lighten(v.$indigo, 5%); //Color indigo mas claro
+        min-height: 12rem; //Altura minima de 120px (puede crecer segun el contenido)
+        display: flex; 
+        align-items: center; //Centramos verticalmente el contenido
+        padding: 2rem;
+        line-height: 2; //interlineado para que el texto no se pegue en caso de que un nombre sea muy largo 
+        border-radius: .5rem;
+        &:hover{
+            background-color: darken(v.$indigo, 5%); //Color indigo mas oscuro
+        }
+        
+        a {
+            color: v.$blanco;
+        }
+    }
+}
